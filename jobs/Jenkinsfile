@@ -10,21 +10,11 @@ pipeline {
   }
   stages {
 
-    stage("paso para rama devel"){
-      when {
-          branch 'devel' 
-        }
-      steps {
-          script {			
-                sh "paso 1 para devel"
-        }
-      }
-    }
  stage("paso 1"){
      
       steps {
           script {			
-           sh "hola mundo"
+           sh "echo 'hola mundo'"
         }
       }
     }
@@ -32,15 +22,14 @@ pipeline {
   post {
       always {          
           deleteDir()
+           sh "echo 'fase always'"
       }
       success {
-            sh "fase success"
+            sh "echo 'fase success'"
         }
-      unstable {
-            sh "fase unstable"  
-        }
+
       failure {
-            sh "fase failure"
+            sh "echo 'fase failure'"
       }
       
   }
