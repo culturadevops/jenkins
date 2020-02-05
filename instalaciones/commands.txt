@@ -1,0 +1,4 @@
+docker build -t jenkins-base .
+docker tag jenkins-base 397748689898.dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0
+docker push 397748689898.dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0
+397748689898.dkr.ecr.us-east-1.amazonaws.com/base/jenkins

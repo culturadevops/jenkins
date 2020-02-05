@@ -1,0 +1,153 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": "arn:aws:iam::246768504579:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/jenkins",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 9999,
+          "protocol": "tcp",
+          "containerPort": 8080
+        },
+        {
+          "hostPort": 50000,
+          "protocol": "tcp",
+          "containerPort": 50000
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 768,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [
+        {
+          "readOnly": null,
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "docker"
+        },
+        {
+          "readOnly": null,
+          "containerPath": "/var/jenkins_home",
+          "sourceVolume": "efs"
+        }
+      ],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 2048,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "246768504579.dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "jenkins"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "2048",
+  "taskRoleArn": "arn:aws:iam::246768504579:role/ecsTaskExecutionRole",
+  "compatibilities": [
+    "EC2"
+  ],
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:246768504579:task-definition/jenkins:1",
+  "family": "jenkins",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-ecr-pull"
+    }
+  ],
+  "pidMode": null,
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "networkMode": null,
+  "cpu": "768",
+  "revision": 1,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": [
+    {
+      "name": "docker",
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "dockerVolumeConfiguration": null
+    },
+    {
+      "name": "efs",
+      "host": {
+        "sourcePath": "/efs/jenkins_home"
+      },
+      "dockerVolumeConfiguration": null
+    }
+  ]
+}

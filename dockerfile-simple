@@ -1,0 +1,7 @@
+FROM jenkins/jenkins:lts
+ #https://updates.jenkins.io/download/plugins/
+ #docker build -t jenkins .
+ #docker run  -p "80:8080" jenkins
+USER root
+
+RUN usermod -aG docker jenkinss

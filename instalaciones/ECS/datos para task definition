@@ -1,0 +1,16 @@
+imagen .dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0
+
+ port
+	9999	8080
+	50000	50000
+
+ mount
+	docker 
+		/var/run/docker.sock
+	efs
+		/var/jenkins_home
+
+ volumen 
+	/var/run/docker.sock
+
+	/efs/jenkins_home

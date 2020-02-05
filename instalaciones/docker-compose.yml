@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  jenkins:
+    image: jenkins-img
+    container_name: jenkins-container
+    build: ./
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock 
+     - ./jenkins_home:/var/jenkins_home
+    ports:  
+     - "8080:8080"
