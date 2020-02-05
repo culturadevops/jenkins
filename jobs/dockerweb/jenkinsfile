@@ -53,21 +53,7 @@ pipeline {
                 }                    
                                   
             }
-             stage('pruebas') {
-                steps {
-                    script{
-                        sh 'docker exec ${name_final} php vendor/bin/phpunit'
-                        }   
-                }                                        
-            }
-            stage('command') {
-            steps {
-                script{
-                    sh ''' 
-                        docker exec  ${name_final} php artisan migrate
-                    '''
-                    }
-                }                                   
-            }
+            
+          
         }   
     }
