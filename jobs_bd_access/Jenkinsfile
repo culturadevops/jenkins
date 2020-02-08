@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1'}
+    agent any
     parameters {
         string defaultValue: '', description: 'Nombre del usuario a crear', name: 'USUARIO', trim: true
         string defaultValue: '', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
