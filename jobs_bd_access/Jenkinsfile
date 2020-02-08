@@ -5,13 +5,13 @@ pipeline {
         string defaultValue: '', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
         choice choices: ['Lectura','Admin','Desarrollador'], description: '', name: 'TIPOUSUARIO'
         extendedChoice description: '', multiSelectDelimiter: ',', name: 'DATABASE', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', 
-            value: 'database', visibleItemCount: 10
+            value: 'database,otroejemplo', visibleItemCount: 10
     }
     environment {
         ADMINPERMISO = "SHOW DATABASES,INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER "
         DESARROLLADOR= "INSERT, UPDATE, DELETE, CREATE, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE,CREATE VIEW, CREATE ROUTINE, ALTER ROUTINE, TRIGGER"
         PERMISO = "SELECT, SHOW VIEW "
-        SUFIJOHOST= "cjtuzy8lxogj.us-east-1.rds.amazonaws.com"
+        SUFIJOHOST= ""
     }
     stages {
         stage ('Creando Usuario') {
