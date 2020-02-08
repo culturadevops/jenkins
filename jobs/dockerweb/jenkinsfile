@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script{
                     sh ''' 
-                    docker build . -t ${name_imagen}:${tag_imagen}
+                    docker build    jobs/dockerweb/Dockerfile -t ${name_imagen}:${tag_imagen}
                     '''
                     }
                     
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script{
                     sh ''' 
-                        docker run -dtp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
+                        docker run -dp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
  
                     '''
                     }
