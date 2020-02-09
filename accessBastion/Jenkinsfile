@@ -1,0 +1,17 @@
+pipeline {
+    agent { label 'bastion'}
+    parameters {
+        string defaultValue: '', description: 'Nombre del usuario a crear', name: 'USUARIO', trim: true
+        string defaultValue: 'elpreciomasbajo2020', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
+    }
+    stages {
+        stage ('Creando Usuario') {
+            steps {
+                        script {
+                           sh  "sudo useradd -d /home/$USUARIO  -m -p \$(echo '$PASSWORD' | openssl passwd -1 -stdin) $USUARIO"
+                    }
+                
+            }
+        }
+    }
+}
