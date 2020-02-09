@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label  "ec2-fleet"}
     parameters {
         string defaultValue: '', description: 'Nombre del usuario a crear', name: 'USUARIO', trim: true
         string defaultValue: '', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
