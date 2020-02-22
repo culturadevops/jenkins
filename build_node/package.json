@@ -1,0 +1,13 @@
+{
+    "name": "hello-world",
+    "description": "Sample NodeJs web application",
+    "version": "0.0.1",
+    "private": true,
+    "devDependencies": {
+        "mocha": "5.0.0",
+        "unit.js": "2.0.0"
+    },
+    "scripts": {
+        "test": "mocha --recursive tests"
+    }
+}
