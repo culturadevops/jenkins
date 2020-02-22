@@ -5,9 +5,8 @@ pipeline {
  
             stage ('test') {
                 steps {
-                    dir("build_java"){
+                  
                     sh "mvn clean compile test"
-                    }
                    
                 }
             }
