@@ -1,0 +1,4 @@
+com/aws/codestar/projecttemplates/configuration/MvcConfig.class
+com/aws/codestar/projecttemplates/controller/HelloWorldController.class
+com/aws/codestar/projecttemplates/HelloWorldAppInitializer.class
+com/aws/codestar/projecttemplates/configuration/ApplicationConfig.class

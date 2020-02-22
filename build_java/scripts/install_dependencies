@@ -1,0 +1,11 @@
+#!/bin/bash
+cd /home/ec2-user/javaapp
+wget https://s3.amazonaws.com/dhqs-mirror-iad/apache-tomcat-8.5.41.tar.gz
+mkdir /opt/tomcat
+tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+cd /opt/tomcat
+sed -i 's|port="8080"|port="80"|g' conf/server.xml
+rm -rf webapps/ROOT
+mv /home/ec2-user/javaapp/ROOT.war webapps/
+yum -y install java-1.8.0-openjdk-1.8.0.171
+alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
