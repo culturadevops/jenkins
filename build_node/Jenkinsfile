@@ -16,17 +16,22 @@ pipeline {
                   }
                 }
             }
-            stage ('docker Build ') {
+             stage ('guardando artefacto') {
                 steps {
-                   echo "build"
-                }
-            }
-           
-            stage ('docker push') {
-                steps {
-                 echo " push"
-                }
 
+                    sh 'aws s3 cp --recursive public/ s3://culturadevops/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers'
+                }
             }
+        /*    stage ('crear sam') {
+                steps {
+
+                    sh '/home/linuxbrew/.linuxbrew/bin/sam package   --template-file ci01template.yml   --output-template-file package.yml   --s3-bucket sam-mongo'
+                }
+            }
+            stage ('crear deploy') {
+                steps {
+                    sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name ci01mongo   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
+                }
+            }*/
         }
 }
