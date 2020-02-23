@@ -18,8 +18,10 @@ pipeline {
             }
              stage ('guardando artefacto') {
                 steps {
+                    dir(   "build_node"){
+                        sh 'aws s3 cp --recursive public/ s3://culturadevops/public --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers'
 
-                    sh 'aws s3 cp --recursive public/ s3://culturadevops/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers'
+                    }
                 }
             }
         /*    stage ('crear sam') {
