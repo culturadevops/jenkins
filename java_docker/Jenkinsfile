@@ -16,8 +16,8 @@ pipeline {
                     VERSION=$(grep "version" target/maven-archiver/pom.properties|cut -d"=" -f2)
                     TAG=$(git rev-parse --short HEAD)
                     TAG="v$VERSION-$BUILD_NUMBER"
-                    docker build -t $DIR_ECR/java-service:$TAG -f devops/Dockerfile .
-                    docker push $DIR_ECR/java-service:$TAG
+                    docker build -t $DIR_ECRjava-service:$TAG -f devops/Dockerfile .
+                    docker push $DIR_ECRjava-service:$TAG
                     '''
                     }
                   
