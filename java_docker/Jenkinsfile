@@ -8,6 +8,7 @@ pipeline {
             }
             stage ('Create docker image') {
                 steps {
+                    dir("java_docker"){
                     sh '$(aws ecr get-login --no-include-email --region us-east-1)'
                     sh '''
                     VERSION=$(grep "version" target/maven-archiver/pom.properties|cut -d"=" -f2)
@@ -16,6 +17,8 @@ pipeline {
                     docker build -t $DIR_ECR/java-service:$TAG -f devops/Dockerfile .
                     docker push $DIR_ECR/java-service:$TAG
                     '''
+                    }
+                  
                 }
 
             }
