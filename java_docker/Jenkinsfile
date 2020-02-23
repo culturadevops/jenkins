@@ -3,7 +3,9 @@ pipeline {
         stages {
             stage ('Build application') {
                 steps {
-                    sh "mvn clean install -Dmaven.test.skip=true"
+                    dir("java_docker"){
+                     sh "mvn clean install -Dmaven.test.skip=true"
+                    }
                 }
             }
             stage ('Create docker image') {
