@@ -1,0 +1,38 @@
+server:
+  port: 8031
+spring:
+  application:
+    name: us-order-manager
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 20
+      idle-timeout: 10000
+      connection-timeout: 30000
+      auto-commit: false
+      pool-name: engine_pool_inkatracker
+      minimum-idle: 5
+
+  jackson:
+    default-property-inclusion: non_null
+  # Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+  # stripped before adding them to the templates manager).
+  jpa:
+    # Show or not log for each sql query
+    show-sql: false
+
+    hibernate:
+      # Hibernate ddl auto (create, create-drop, updateBO): with "updateBO" the database
+      # schema will be automatically updated accordingly to java entities found in
+      # the project
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        # Naming strategy
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        # Allows Hibernate to generate SQL optimized for a particular DBMS
+        dialect: org.hibernate.dialect.MySQL5Dialect
+logging:
+  config: classpath:logging/logback.xml

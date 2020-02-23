@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url:
+    username:
+    password:
+  flyway:
+    baseline-on-migrate: true

@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:mysql://ci02fulfillment.c4rjguxjh6uc.us-east-1.rds.amazonaws.com:3306/ci02fulfillment?autoReconnect=true&useSSL=false&serverTimezone=America/Lima
+    username: carloscalla
+    password: elpreciomasbajo
+  kafka:
+    producer:
+      bootstrap-servers: pkc-43n10.us-central1.gcp.confluent.cloud:9092
+      topic: order_topic
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: io.confluent.kafka.serializers.KafkaJsonSerializer
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
+    consumer:
+      bootstrap-servers: pkc-43n10.us-central1.gcp.confluent.cloud:9092
+      group-id: order_callback_topic
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
+    confluent:
+      api-key: LGMCNIO7PGTAH3OH
+      api-secret: zYs4AaaM0iVOrQh84KvdwkScw1xdz21QicBs9wvTxtYPYIIQtODi+SdmYVUe2uEk
+    listener:
+      ack-mode: MANUAL
+external-service:
+  audit:
+    create-order: http://us-audit/audit/order
+    time-out: 20000
+  dispatcher:
+    insink-tracker:
+      uri: http://us-dd/order/insink-tracker/{ecommerceId}
+      connect-timeout: 10000
+      read-timeout: 120000
+    tracker:
+     uri: http://us-dd/order/tracker/{ecommerceId}
+     connect-timeout: 10000
+     read-timeout: 120000
+

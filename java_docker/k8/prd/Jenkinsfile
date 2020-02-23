@@ -1,0 +1,24 @@
+pipeline {
+    agent { label 'slave1'}
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+
+        stage ('Apply Service') {
+            steps {
+                sh "kubectl apply -f k8/prd/service.yml"
+            }
+
+        }
+        stage ('Apply Deployment') {
+            steps {
+                sh 'cat k8/prd/deployment.yml | sed "s/{{TAG}}/$TAG/g" | kubectl apply -f -'
+
+
+            }
+
+        }
+
+    }
+}

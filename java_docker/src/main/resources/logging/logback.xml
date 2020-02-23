@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="APP_NAME" value="us-order-manager"/>
+	<variable name="LOG_LEVEL_SYSTEM" value="${LOG_LEVEL_SYSTEM:-DEBUG}" />
+	<variable name="LOG_LEVEL_BUSINESS" value="${LOG_LEVEL_BUSINESS:-DEBUG}" />
+
+	<!-- ============= Log show in Console (The same pattern as file but with colors) ============= -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP_NAME}] [%level] [%thread] [%class{2}:%line] %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- ============= Log file ============= -->
+	<property name="LOG_FILE_PATH" value="${LOGGER_DIR:-/var/log/${APP_NAME}}/system.log"/>
+
+
+	<appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE_PATH}</file>
+
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>${LOG_LEVEL_SYSTEM}</level>
+		</filter>
+
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>BUSINESS</marker>
+			</evaluator>
+			<onMismatch>NEUTRAL</onMismatch>
+			<onMatch>DENY</onMatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+			<!-- Daily File creation -->
+			<fileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd}%i.gz</fileNamePattern>
+
+			<!-- Create another File if it reach a Max. size -->
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+
+			<!-- Delete logs older than 5 days -->
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP_NAME}] [%level] [%thread] [%class{2}:%line] %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- ============= Business Log file ============= -->
+	<property name="LOG_FILE_BUSINESS_PATH" value="${LOGGER_DIR:-/var/log/${APP_NAME}}/business.log"/>
+	<appender name="LOG_FILE_BUSINESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<file>${LOG_FILE_BUSINESS_PATH}</file>
+
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>${LOG_LEVEL_BUSINESS}</level>
+		</filter>
+
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>BUSINESS</marker>
+			</evaluator>
+			<onMismatch>DENY</onMismatch>
+			<onMatch>NEUTRAL</onMatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+			<!-- Daily File creation -->
+			<fileNamePattern>${LOG_FILE_BUSINESS_PATH}.%d{yyyy-MM-dd}%i.gz</fileNamePattern>
+
+			<!-- Create another File if it reach a Max. size -->
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+
+			<!-- Delete logs older than 5 days -->
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP_NAME}] [%marker] %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- ============= Have o be DEBUG to control the Level in each appender ============= -->
+
+	<root>
+		<appender-ref ref="LOG_FILE" />
+		<appender-ref ref="LOG_FILE_BUSINESS" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+
+</configuration>

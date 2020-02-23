@@ -1,0 +1,23 @@
+pipeline {
+    agent { label 'master'}
+        stages {
+            stage ('Build application') {
+                steps {
+                    sh "mvn clean install -Dmaven.test.skip=true"
+                }
+            }
+            stage ('Create docker image') {
+                steps {
+                    sh '$(aws ecr get-login --no-include-email --region us-east-1)'
+                    sh '''
+                    VERSION=$(grep "version" target/maven-archiver/pom.properties|cut -d"=" -f2)
+                    TAG=$(git rev-parse --short HEAD)
+                    TAG="v$VERSION-$BUILD_NUMBER"
+                    docker build -t $DIR_ECR/java-service:$TAG -f devops/Dockerfile .
+                    docker push $DIR_ECR/java-service:$TAG
+                    '''
+                }
+
+            }
+        }
+}

@@ -1,0 +1,19 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "source",
+      "type": "string"
+    },
+    {
+      "name": "notes",
+      "type": "string"
+    }
+  ],
+  "name": "Order",
+  "namespace": "com.inretailpharma.digital.ordermanager.dto",
+  "type": "record"
+}

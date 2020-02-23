@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: pkc-43n10.us-central1.gcp.confluent.cloud:9092
+          configuration:
+            sasl:
+              jaas:
+                config: org.apache.kafka.common.security.plain.PlainLoginModule required username="LGMCNIO7PGTAH3OH" password="zYs4AaaM0iVOrQh84KvdwkScw1xdz21QicBs9wvTxtYPYIIQtODi+SdmYVUe2uEk";
+              mechanism: PLAIN
+            security:
+                protocol: SASL_SSL
+          auto-create-topics: false
+      bindings:
+        output:
+          destination: test-topic
+
+

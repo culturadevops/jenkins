@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url:
+    username:
+    password:
+  jpa:
+    show-sql: false
+  flyway:
+    baseline-on-migrate: true
