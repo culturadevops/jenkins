@@ -11,7 +11,4 @@ RUN add-apt-repository \
 RUN apt-get update  -qq \
     && apt-get install docker-ce=17.12.1~ce-0~debian -y
 RUN apt install maven -y
-RUN apt install awscli -y
-RUN apt-get install python3-pip -y
-RUN pip3 install --upgrade awscli
 RUN usermod -aG docker jenkins
