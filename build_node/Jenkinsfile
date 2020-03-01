@@ -26,12 +26,12 @@ pipeline {
         /*    stage ('crear sam') {
                 steps {
 
-                    sh '/home/linuxbrew/.linuxbrew/bin/sam package   --template-file ci01template.yml   --output-template-file package.yml   --s3-bucket sam-mongo'
+                    sh '/home/linuxbrew/.linuxbrew/bin/sam package   --template-file build_node/template.yml   --output-template-file package.yml   --s3-bucket culturadevops'
                 }
             }
             stage ('crear deploy') {
                 steps {
-                    sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name ci01mongo   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
+                    sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name nodejstest   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
                 }
             }*/
         }
