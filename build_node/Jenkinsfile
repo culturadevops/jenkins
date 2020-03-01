@@ -23,7 +23,7 @@ pipeline {
                     }
                 }
             }
-        /*    stage ('crear sam') {
+          stage ('crear sam') {
                 steps {
 
                     sh '/home/linuxbrew/.linuxbrew/bin/sam package   --template-file build_node/template.yml   --output-template-file package.yml   --s3-bucket culturadevops'
@@ -33,6 +33,6 @@ pipeline {
                 steps {
                     sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name nodejstest   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
                 }
-            }*/
+            }
         }
 }
