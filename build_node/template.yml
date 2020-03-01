@@ -7,7 +7,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.get
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: arn:aws:iam::397748689898:role/lambdafull
       Events:
         GetEvent:
