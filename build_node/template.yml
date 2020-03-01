@@ -6,6 +6,7 @@ Resources:
   nodejstest:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: "minuevonombre" 
       Handler: index.get
       Runtime: nodejs12.x
       Role: arn:aws:iam::397748689898:role/lambdafull
