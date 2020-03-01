@@ -3,6 +3,10 @@ Transform: AWS::Serverless-2016-10-31
 
 
 Resources:
+  prdApiGateway:
+  Type: AWS::Serverless::Api
+  Properties:
+    StageName: 'prd'
   nodejstest:
     Type: AWS::Serverless::Function
     Properties:
@@ -14,4 +18,6 @@ Resources:
           Type: Api
           Properties:
             Path: /
-            Method: gets
+            Method: get
+            RestApiId:
+              Ref: prdApiGateway
