@@ -31,7 +31,7 @@ pipeline {
             }
             stage ('crear deploy') {
                 steps {
-                    sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name nodejstest   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
+                    sh '/home/linuxbrew/.linuxbrew/bin/sam deploy   --template-file package.yml   --stack-name nodejstest  --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM'
                 }
             }
         }
