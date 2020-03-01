@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: java-service
-        image: 1231231231231.dkr.ecr.us-east-1.amazonaws.com/java-service:{{TAG}}
+        image: <id_detucuenta>.dkr.ecr.us-east-1.amazonaws.com/java-service:{{TAG}}
         env:
         - name: environment
           value: "ci"
