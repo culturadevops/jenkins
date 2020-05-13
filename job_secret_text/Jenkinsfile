@@ -32,8 +32,8 @@ pipeline {
                             }
                             withCredentials([string(credentialsId: 'basedatos_link', variable: 'DB_LINK')]) {
                                 for (int i = 0; i < browsers.size(); ++i) {
-                                    sh  "mysql -u${USER_DB} -p${PASSWD_DB} -h ${browsers[i]}.${DB_LINK} -e \"CREATE USER IF NOT EXISTS '$USUARIO'@'%' IDENTIFIED BY '$PASSWORD' ;\""
-                                    sh  "mysql -u${USER_DB} -p${PASSWD_DB} -h ${browsers[i]}.${DB_LINK} -e \"GRANT $PERMISO ON dev1305.* TO '$USUARIO'@'%';\""
+                                    echo  "mysql -u${USER_DB} -p${PASSWD_DB} -h ${browsers[i]}.${DB_LINK} -e \"CREATE USER IF NOT EXISTS '$USUARIO'@'%' IDENTIFIED BY '$PASSWORD' ;\""
+                                    echo  "mysql -u${USER_DB} -p${PASSWD_DB} -h ${browsers[i]}.${DB_LINK} -e \"GRANT $PERMISO ON dev1305.* TO '$USUARIO'@'%';\""
                                 }
                             }
                             
