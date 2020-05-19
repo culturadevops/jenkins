@@ -3,7 +3,7 @@ pipeline {
 
         stages {
  
-          /*  stage ('test') {
+            stage ('test') {
                 steps {
                   dir("build_java"){
                         echo "mvn clean compile test"
@@ -11,7 +11,7 @@ pipeline {
                    
                    
                 }
-            }*/
+            }
 ///usr/lib/jvm/java-8-openjdk-amd64/bin/
             stage ('Build application') {
                 steps {
@@ -22,34 +22,7 @@ pipeline {
                     }   
                 }
             }
-                      stage ('nexus') {
-                steps {
-                    script {
-                        //pipeline-utility-steps
-                          dir("build_java"){
-                            def   pom = readMavenPom file: "pom.xml";
-                         
-                            dir("target"){
-                                nexusArtifactUploader(
-                                    nexusVersion: 'nexus3',
-                                    protocol: 'http',
-                                    nexusUrl: 'nexus.cindibyinkafarma.com',
-                                    groupId: pom.groupId,
-                                    version: pom.version,
-                                    repository: 'Product',
-                                    credentialsId: 'nexuscredenciales',
-                                    artifacts: [
-                                        [artifactId: pom.artifactId,
-                                        classifier: '',
-                                        file: 'ROOT.war',
-                                        type: pom.packaging]
-                                    ]
-                                )
-                        }
-                    }
-                    }    
-        }
-                    }    
+ 
             stage ('Create docker image') {
                 steps {
                  echo "creando docker"
