@@ -3,7 +3,7 @@ pipeline {
 
         stages {
  
-            stage ('test') {
+          /*  stage ('test') {
                 steps {
                   dir("build_java"){
                         echo "mvn clean compile test"
@@ -11,7 +11,7 @@ pipeline {
                    
                    
                 }
-            }
+            }*/
 ///usr/lib/jvm/java-8-openjdk-amd64/bin/
             stage ('Build application') {
                 steps {
