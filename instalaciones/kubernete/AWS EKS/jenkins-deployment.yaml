@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image:  1231231231231.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
+          image:  <id_detucuenta>.dkr.ecr.us-east-1.amazonaws.com/jenkins:latest
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=true
