@@ -17,7 +17,7 @@ pipeline {
                 steps {
                     dir("build_java"){
 
-                        sh "export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64/bin/' && mvn clean install -Dmaven.test.skip=true"
+                        sh "export JAVA_HOME='/usr/bin/java' && mvn clean install -Dmaven.test.skip=true"
                         sh "tree"
                     }   
                 }
