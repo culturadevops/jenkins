@@ -28,8 +28,8 @@ pipeline {
                         //pipeline-utility-steps
                           dir("build_java"){
                             def   pom = readMavenPom file: "pom.xml";
-                          }
-                        dir("/target"){
+                         
+                            dir("/target"){
                                 nexusArtifactUploader(
                                     nexusVersion: 'nexus3',
                                     protocol: 'http',
@@ -46,6 +46,7 @@ pipeline {
                                     ]
                                 )
                         }
+                    }
                     }    
         }
                     }    
