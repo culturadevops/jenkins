@@ -39,7 +39,7 @@ pipeline {
                                     artifacts: [
                                         [artifactId: pom.artifactId,
                                         classifier: '',
-                                        file: 'HelloWorld',
+                                        file: 'ROOT.war',
                                         type: pom.packaging]
                                     ]
                                 )
