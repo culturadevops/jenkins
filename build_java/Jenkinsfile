@@ -36,7 +36,7 @@ pipeline {
                                     nexusUrl: 'nexus.cindibyinkafarma.com',
                                     groupId: pom.groupId,
                                     version: pom.version,
-                                    repository: 'Product',
+                                    repository: 'add-init',
                                     credentialsId: 'nexuscredenciales',
                                     artifacts: [
                                         [artifactId: pom.artifactId,
