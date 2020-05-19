@@ -6,7 +6,7 @@ pipeline {
             stage ('test') {
                 steps {
                   dir("build_java"){
-                        sh "mvn clean compile test"
+                        echo "mvn clean compile test"
                   }
                    
                    
@@ -15,7 +15,8 @@ pipeline {
 
             stage ('Build application') {
                 steps {
-                    echo "mvn clean install -Dmaven.test.skip=true"
+                    sh "mvn clean install -Dmaven.test.skip=true"
+                    sh "tree"
                 }
             }
                       stage ('nexus') {
