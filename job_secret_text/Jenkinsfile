@@ -1,15 +1,17 @@
 pipeline {
-    agent { label  "newslave"}
+    agent { label  "master"}
     parameters {
         string defaultValue: '', description: 'Nombre del usuario a crear', name: 'USUARIO', trim: true
         string defaultValue: '', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
-        choice choices: ['Lectura','Admin','Desarrollador'], description: '', name: 'TIPOUSUARIO'
+        choice choices: ['Lectura','Admin','Desarrollador','APP'], description: '', name: 'TIPOUSUARIO'
         extendedChoice description: '', multiSelectDelimiter: ',', name: 'DATABASE', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', 
             value: 'database,otroejemplo', visibleItemCount: 10
     }
     environment {
         ADMINPERMISO = "SHOW DATABASES,INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER "
-        DESARROLLADOR= "INSERT, UPDATE, DELETE, CREATE, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE,CREATE VIEW, CREATE ROUTINE, ALTER ROUTINE, TRIGGER"
+        DESARROLLADOR= "SELECT, INSERT, UPDATE, DELETE, CREATE, DROP"
+        
+        APP= "INSERT, UPDATE, DELETE, EXECUTE"        
         PERMISO = "SELECT, SHOW VIEW "
     }
     stages {
@@ -25,6 +27,9 @@ pipeline {
                             }
                             if (tipousuario=="Desarrollador"){
                                 PERMISO= PERMISO +","+ DESARROLLADOR
+                            }
+                            if (tipousuario=="APP"){
+                                PERMISO= PERMISO +","+ APP
                             }
                             withCredentials([string(credentialsId: 'basedatos_link', variable: 'DB_LINK')]) {
                                 for (int i = 0; i < browsers.size(); ++i) {
