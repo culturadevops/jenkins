@@ -1,0 +1,60 @@
+pipeline {
+    agent { label 'master'}
+
+        stages {
+ 
+            stage ('test') {
+                steps {
+                  dir("build_java"){
+                        echo "mvn clean compile test"
+                  }
+                   
+                   
+                }
+            }
+///usr/lib/jvm/java-8-openjdk-amd64/bin/
+            stage ('Build application') {
+                steps {
+                    dir("build_java"){
+
+                        sh "mvn -f pom.xml clean install -Dmaven.test.skip=true"
+                        sh "tree"
+                    }   
+                }
+            }
+            stage ('nexus') {
+                steps {
+                    script {
+                            //pipeline-utility-steps
+                        dir("build_java"){
+                            def   pom = readMavenPom file: "pom.xml";
+                                
+                            dir("target"){
+                                nexusArtifactUploader(
+                                    nexusVersion: 'nexus3',
+                                    protocol: 'http',
+                                    nexusUrl: 'nexus.url.com',
+                                    groupId: pom.groupId,
+                                    version: pom.version,
+                                    repository: 'app-init',
+                                    credentialsId: 'nexuscredenciales',
+                                    artifacts: [
+                                        [artifactId: pom.artifactId,
+                                        classifier: '',
+                                        file: 'ROOT.war',
+                                        type: pom.packaging]
+                                    ]
+                                )
+                            }
+                        }
+                    }    
+                }
+            }    
+            stage ('Create docker image') {
+                steps {
+                 echo "creando docker"
+                }
+
+            }
+        }
+}
