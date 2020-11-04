@@ -2,7 +2,7 @@ pipeline {
     agent { label 'bastion'}
     parameters {
         string defaultValue: '', description: 'Nombre del usuario a crear', name: 'USUARIO', trim: true
-        string defaultValue: 'minueva2020', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
+        string defaultValue: '', description: 'contraseña nueva del usuario a crear', name: 'PASSWORD', trim: true
     }
     stages {
         stage ('Creando Usuario') {
