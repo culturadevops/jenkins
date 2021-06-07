@@ -1,3 +1,4 @@
+este comando lo puedes usar para subir a aws ecr
 docker build -t jenkins-base .
 docker tag jenkins-base <id_detucuenta>.dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0
 docker push <id_detucuenta>.dkr.ecr.us-east-1.amazonaws.com/base/jenkins:base-1.0.0
