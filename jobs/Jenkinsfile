@@ -4,7 +4,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 pipeline {
-  agent { label 'principal' }
+  agent { label 'master' }
   environment {
     appName = "variable" 
   }
