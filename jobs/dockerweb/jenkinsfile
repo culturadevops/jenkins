@@ -15,14 +15,14 @@ pipeline {
 
             when {
                 expression { 
-                    DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_final})"').trim()
+                    DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(sudo docker ps -q --filter name=${name_final})"').trim()
                     return  DOCKER_EXIST != '' 
                 }
             }
             steps {
                 script{
                     sh ''' 
-                         docker stop ${name_final}
+                         sudo docker stop ${name_final}
                     '''
                     }
                     
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script{
                     sh ''' 
-                    docker build    jobs/dockerweb/ -t ${name_imagen}:${tag_imagen}
+                    sudo docker build    jobs/dockerweb/ -t ${name_imagen}:${tag_imagen}
                     '''
                     }
                     
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script{
                     sh ''' 
-                        docker run -dp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
+                        sudo docker run -dp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
  
                     '''
                     }
